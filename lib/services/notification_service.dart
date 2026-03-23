@@ -140,10 +140,10 @@ class NotificationService {
         : '$customerName ordered ₹${amount.toStringAsFixed(0)}';
 
     await _notifications.show(
-      orderId.hashCode, // Unique ID based on order
-      title,
-      body,
-      details,
+      id: orderId.hashCode,
+      title: title,
+      body: body,
+      notificationDetails: details,
       payload: orderId,
     );
 
@@ -177,10 +177,10 @@ class NotificationService {
     );
 
     await _notifications.show(
-      orderId.hashCode,
-      '🚚 Ready for Delivery!',
-      'Order for $customerName is ready. Deliver to: $address',
-      details,
+      id: orderId.hashCode,
+      title: '🚚 Ready for Delivery!',
+      body: 'Order for $customerName is ready. Deliver to: $address',
+      notificationDetails: details,
       payload: orderId,
     );
 
@@ -233,10 +233,10 @@ class NotificationService {
     }
 
     await _notifications.show(
-      orderId.hashCode,
-      '$emoji Order ${status.replaceAll('_', ' ').toUpperCase()}',
-      message,
-      details,
+      id: orderId.hashCode,
+      title: '$emoji Order ${status.replaceAll('_', ' ').toUpperCase()}',
+      body: message,
+      notificationDetails: details,
       payload: orderId,
     );
 
@@ -272,10 +272,10 @@ class NotificationService {
     );
 
     await _notifications.show(
-      DateTime.now().millisecondsSinceEpoch ~/ 1000,
-      title,
-      body,
-      details,
+      id: DateTime.now().millisecondsSinceEpoch ~/ 1000,
+      title: title,
+      body: body,
+      notificationDetails: details,
       payload: payload,
     );
 
@@ -300,7 +300,7 @@ class NotificationService {
 
   /// Cancel a specific notification
   Future<void> cancelNotification(int id) async {
-    await _notifications.cancel(id);
+    await _notifications.cancel(id: id);
   }
 
   /// Cancel all notifications
